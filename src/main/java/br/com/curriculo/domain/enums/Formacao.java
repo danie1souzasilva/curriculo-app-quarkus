@@ -1,0 +1,29 @@
+package br.com.curriculo.domain.enums;
+
+public enum Formacao {
+
+        // Base técnica
+        TECNICO_EM_INFORMATICA,
+        TECNICO_EM_DESENVOLVIMENTO_DE_SISTEMAS,
+        TECNICO_EM_REDES,
+        TECNICO_EM_ELETRONICA,
+
+        // Graduação
+        CIENCIA_DA_COMPUTACAO,
+        ENGENHARIA_DE_SOFTWARE,
+        SISTEMAS_DE_INFORMACAO,
+        ENGENHARIA_DA_COMPUTACAO,
+        ANALISE_E_DESENVOLVIMENTO_DE_SISTEMAS,
+        TECNOLOGIA_DA_INFORMACAO,
+
+        // Pós-graduação
+        POS_EM_ENGENHARIA_DE_SOFTWARE,
+        POS_EM_CIENCIA_DE_DADOS,
+        POS_EM_ARQUITETURA_DE_SOFTWARE,
+        POS_EM_SEGURANCA_DA_INFORMACAO,
+        POS_EM_GESTAO_DE_TI,
+
+        // Stricto sensu
+        MESTRADO_EM_COMPUTACAO,
+        DOUTORADO_EM_COMPUTACAO
+}

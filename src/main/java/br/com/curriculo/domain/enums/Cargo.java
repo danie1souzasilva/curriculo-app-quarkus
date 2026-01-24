@@ -1,0 +1,35 @@
+package br.com.curriculo.domain.enums;
+
+public enum Cargo {
+    // Desenvolvimento
+    DESENVOLVEDOR_BACKEND,
+    DESENVOLVEDOR_FRONTEND,
+    DESENVOLVEDOR_FULLSTACK,
+    DESENVOLVEDOR_MOBILE,
+    DESENVOLVEDOR_DESKTOP,
+    // Dados
+    ENGENHEIRO_DE_DADOS,
+    CIENTISTA_DE_DADOS,
+    ANALISTA_DE_DADOS,
+    ANALISTA_DE_BI,
+    // Infra / Plataforma
+    DEVOPS,
+    SRE,
+    ENGENHEIRO_DE_PLATAFORMA,
+    ADMINISTRADOR_DE_SISTEMAS,
+    // Qualidade
+    ANALISTA_DE_QUALIDADE,
+    QA_AUTOMACAO,
+    // Arquitetura
+    ARQUITETO_DE_SOFTWARE,
+    ARQUITETO_DE_SOLUCOES,
+    // Segurança
+    ANALISTA_DE_SEGURANCA,
+    ENGENHEIRO_DE_SEGURANCA,
+    // Gestão técnica
+    LIDER_TECNICO,
+    GERENTE_DE_ENGENHARIA,
+    // Outros
+    ANALISTA_DE_SISTEMAS,
+    CONSULTOR_TECNOLOGICO
+}

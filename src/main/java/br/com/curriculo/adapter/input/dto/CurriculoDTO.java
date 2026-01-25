@@ -1,17 +1,16 @@
-package br.com.curriculo.adapter.output.banco.entidade;
-
+package br.com.curriculo.adapter.input.dto;
 
 import br.com.curriculo.domain.enums.*;
-import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Entity
-@Table(name = "CURRICULO")
-public class CurriculoEntidade {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class CurriculoDTO {
     private Area area;
     private String nome;
     private String email;
@@ -24,4 +23,6 @@ public class CurriculoEntidade {
     private NivelFormacao nivelFormacao;
     private List<Curso> cursos;
     private List<String> instituicao;
+
+
 }

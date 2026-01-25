@@ -11,7 +11,6 @@ public class ExperienciaEntidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long curriculoID;
     private Cargo cargo;
     private Area area;
     private Integer anosDeExperiencia;

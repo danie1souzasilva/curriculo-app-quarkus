@@ -1,6 +1,4 @@
-package br.com.curriculo.domain.service
-
-
+package br.com.curriculo.domain.model;
 
 public class ScoreDetalhado {
 

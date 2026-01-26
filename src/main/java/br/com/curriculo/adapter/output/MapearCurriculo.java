@@ -14,6 +14,19 @@ public interface MapearCurriculo {
     Curriculo entidadeDominio(CurriculoEntidade curriculoEntidade);
     List<Curriculo> entidadeDominioList(List<CurriculoEntidade> curriculos);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "area", source = "area")
+    @Mapping(target = "nome", source = "nome")
+    @Mapping(target = "email", source = "email")
+    @Mapping(target = "descricao", source = "descricao")
+    @Mapping(target = "formacao", source = "formacao")
+    @Mapping(target = "cargo", source = "cargo")
+    @Mapping(target = "anosDeExperiencia", source = "anosDeExperiencia")
+    @Mapping(target = "nivel", source = "nivel")
+    @Mapping(target = "empresa", source = "empresa")
+    @Mapping(target = "nivelFormacao", source = "nivelFormacao")
+    @Mapping(target = "cursos", source = "cursos")
+    @Mapping(target = "instituicao", source = "instituicao")
     CurriculoEntidade dominioEntidade(Curriculo curriculo);
     List<CurriculoEntidade> dominioEntidadeList(List<Curriculo> curriculos);
 

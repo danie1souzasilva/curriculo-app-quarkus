@@ -6,7 +6,6 @@ import br.com.curriculo.domain.model.Curriculo;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,11 +26,11 @@ public class CurriculoRepository implements PanacheRepository<CurriculoEntidade>
         return converter.entidadeDominio(entidade);
     }
 
-    public List<Curriculo> buscarPorNome(String nome) {
-        List<CurriculoEntidade> entidades =
-                find("LOWER(nome) like LOWER(?1)", "%" + nome + "%").list();
+    public Curriculo buscarPorNome(String nome) {
+        CurriculoEntidade entidade =
+                find("LOWER(nome) like LOWER(?1)", "%" + nome + "%").firstResult();
         System.out.println("CurriculoRepository.buscarPorNome");
 
-        return converter.entidadeDominioList(entidades);
+        return converter.entidadeDominio(entidade);
     }
 }

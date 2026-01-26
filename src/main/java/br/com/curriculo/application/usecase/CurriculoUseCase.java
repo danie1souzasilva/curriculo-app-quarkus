@@ -26,7 +26,7 @@ public class CurriculoUseCase {
         System.out.println("CurriculoRepository.salvarCurriculo");
     }
 
-    public List<Curriculo> buscarCurriculo(String nome) {
+    public Curriculo buscarCurriculo(String nome) {
         return curriculoRepository.buscarPorNome(nome);
     }
 }

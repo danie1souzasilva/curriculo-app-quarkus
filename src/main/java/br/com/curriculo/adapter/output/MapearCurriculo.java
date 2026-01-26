@@ -3,7 +3,6 @@ package br.com.curriculo.adapter.output;
 import br.com.curriculo.adapter.input.dto.CurriculoDTO;
 import br.com.curriculo.adapter.output.banco.entidade.CurriculoEntidade;
 import br.com.curriculo.domain.model.Curriculo;
-import jakarta.enterprise.inject.Model;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

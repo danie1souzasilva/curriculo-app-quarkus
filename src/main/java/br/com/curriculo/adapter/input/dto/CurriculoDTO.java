@@ -1,7 +1,6 @@
 package br.com.curriculo.adapter.input.dto;
 
 import br.com.curriculo.domain.enums.*;
-import lombok.*;
 
 import java.util.List;
 

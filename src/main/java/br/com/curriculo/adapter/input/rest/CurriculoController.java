@@ -35,10 +35,10 @@ public class CurriculoController {
         return Response.status(Response.Status.CREATED).entity(dto).build();
     }
     @GET
-    @Path("/lista/{nome}")
-    public Response listarPorNome(@PathParam("nome") String nome) {
-        List<Curriculo> curriculos = curriculoUseCase.buscarCurriculo(nome);
+    @Path("/lista")
+    public Response listarPorNome(@QueryParam("nome") String nome) {
+        Curriculo curriculo = curriculoUseCase.buscarCurriculo(nome);
         System.out.println("CurriculoRepository.buscarPorNome");
-        return Response.ok(curriculos).build();
+        return Response.ok(curriculo).build();
     }
 }

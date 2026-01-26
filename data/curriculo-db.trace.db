@@ -1,0 +1,9 @@
+2026-01-25 12:06:21.230038-03:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_MYENTITY" already exists; SQL statement:
+create global temporary table HTE_MyEntity(rn_ integer not null, id bigint, field varchar(255), primary key (rn_)) transactional [42101-240]
+2026-01-26 17:19:47.011578-03:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_MYENTITY" already exists; SQL statement:
+create global temporary table HTE_MyEntity(rn_ integer not null, id bigint, field varchar(255), primary key (rn_)) transactional [42101-240]
+2026-01-26 17:42:52.114574-03:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_MYENTITY" already exists; SQL statement:
+create global temporary table HTE_MyEntity(rn_ integer not null, id bigint, field varchar(255), primary key (rn_)) transactional [42101-240]

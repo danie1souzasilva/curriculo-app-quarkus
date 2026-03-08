@@ -30,7 +30,7 @@ public class CandidaturaService {
         CurriculoEntidade curriculo = curriculoRepository.findById(usuario.getCurriculoId());
         if (curriculo == null) throw new IllegalArgumentException("Currículo não encontrado");
 
-        int score = curriculoScoreService.calcularScore(mapearCurriculo.entidadeParaDominio(curriculo));
+        int score = curriculoScoreService.calcularScore(mapearCurriculo.entidadeDominio(curriculo));
 
         CandidaturaEntidade candidatura = new CandidaturaEntidade();
         candidatura.setUsuarioId(usuarioId);

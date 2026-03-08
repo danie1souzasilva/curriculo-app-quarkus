@@ -41,5 +41,5 @@ public interface MapearCurriculo {
     @Mapping(target = "instituicao", source = "instituicao")
     Curriculo dtoParaDominio(CurriculoDTO dto);
 
-    Curriculo entidadeParaDominio(CurriculoEntidade curriculo);
+    Curriculo entidadeDominio(CurriculoEntidade curriculo);
 }

@@ -11,9 +11,6 @@ import java.util.List;
 @Mapper(componentModel = "cdi")
 public interface MapearCurriculo {
 
-    Curriculo entidadeDominio(CurriculoEntidade curriculoEntidade);
-    List<Curriculo> entidadeDominioList(List<CurriculoEntidade> curriculos);
-
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "area", source = "area")
     @Mapping(target = "nome", source = "nome")

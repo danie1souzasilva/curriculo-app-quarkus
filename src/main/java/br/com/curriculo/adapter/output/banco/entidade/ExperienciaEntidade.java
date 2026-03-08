@@ -4,7 +4,11 @@ import br.com.curriculo.domain.enums.Area;
 import br.com.curriculo.domain.enums.Cargo;
 import br.com.curriculo.domain.enums.Nivel;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "EXPERIENCIA")
 public class ExperienciaEntidade {

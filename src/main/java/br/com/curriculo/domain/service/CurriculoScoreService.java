@@ -1,11 +1,7 @@
 package br.com.curriculo.domain.service;
 
 import br.com.curriculo.domain.model.Curriculo;
-import br.com.curriculo.domain.model.ScoreDetalhado;
-import br.com.curriculo.domain.enums.Curso;
-import br.com.curriculo.domain.enums.Nivel;
-import br.com.curriculo.domain.enums.NivelFormacao;
-import br.com.curriculo.domain.enums.Area;
+import br.com.curriculo.domain.enums.*;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,9 +22,9 @@ import java.util.Map;
  * Score máximo esperado: ~180 pontos (dependendo da configuração)
  */
 @ApplicationScoped
-public class CurriculoService {
+public class CurriculoScoreService {
 
-    private static final Logger logger = LoggerFactory.getLogger(CurriculoService.class);
+    private static final Logger logger = LoggerFactory.getLogger(CurriculoScoreService.class);
 
     /**
      * Calcula o score total de um currículo baseado em múltiplos critérios.
@@ -43,39 +39,14 @@ public class CurriculoService {
         }
 
         int scoreTotal = 0;
-        scoreTotal += scoreExperiencia(curriculo);
-        scoreTotal += scoreSenioridade(curriculo);
-        scoreTotal += scoreFormacao(curriculo);
-        scoreTotal += scoreCursos(curriculo);
-        scoreTotal += scoreArea(curriculo);
+        scoreTotal += calcularScoreExperiencia(curriculo.getAnosDeExperiencia());
+        scoreTotal += calcularScoreNivel(curriculo.getNivel());
+        scoreTotal += calcularScoreFormacao(curriculo.getNivelFormacao());
+        scoreTotal += calcularScoreCursos(curriculo.getCursos());
+        scoreTotal += calcularScoreArea(curriculo.getArea());
 
         logger.debug("Score calculado para currículo: {} pontos", scoreTotal);
         return scoreTotal;
-    }
-
-    /**
-     * Calcula o score detalhado de um currículo com breakdown por critério.
-     *
-     * @param curriculo o currículo a ser avaliado
-     * @return ScoreDetalhado com pontuação de cada aspecto
-     */
-    public ScoreDetalhado calcularScoreDetalhado(Curriculo curriculo) {
-        if (curriculo == null) {
-            logger.warn("Tentativa de calcular score detalhado com currículo nulo");
-            return new ScoreDetalhado();
-        }
-
-        int scoreExp = scoreExperiencia(curriculo);
-        int scoreNiv = scoreSenioridade(curriculo);
-        int scoreForm = scoreFormacao(curriculo);
-        int scoreCur = scoreCursos(curriculo);
-        int scoreAr = scoreArea(curriculo);
-        int total = scoreExp + scoreNiv + scoreForm + scoreCur + scoreAr;
-
-        logger.debug("Score detalhado: Experiência={}, Nível={}, Formação={}, Cursos={}, Área={}, Total={}",
-                scoreExp, scoreNiv, scoreForm, scoreCur, scoreAr, total);
-
-        return new ScoreDetalhado(total, scoreExp, scoreNiv, scoreForm, scoreCur, scoreAr);
     }
 
     /**
@@ -86,19 +57,20 @@ public class CurriculoService {
      * 2–3 anos = 15 pontos
      * 4–6 anos = 30 pontos
      * 7+ anos = 50 pontos
+     *
+     * @param anosDeExperiencia anos de experiência
+     * @return score de experiência
      */
-    private int scoreExperiencia(Curriculo curriculo) {
-        Integer anos = curriculo.getAnosDeExperiencia();
-
-        if (anos == null || anos < 0) {
+    private int calcularScoreExperiencia(Integer anosDeExperiencia) {
+        if (anosDeExperiencia == null || anosDeExperiencia < 0) {
             return 0;
         }
 
-        return switch (anos) {
+        return switch (anosDeExperiencia) {
             case 0, 1 -> 5;
             case 2, 3 -> 15;
             case 4, 5, 6 -> 30;
-            default -> anos >= 7 ? 50 : 0;
+            default -> anosDeExperiencia >= 7 ? 50 : 0;
         };
     }
 
@@ -110,10 +82,11 @@ public class CurriculoService {
      * PLENO = 25 pontos
      * SENIOR = 40 pontos
      * ESPECIALISTA = 50 pontos
+     *
+     * @param nivel nível profissional
+     * @return score de nível
      */
-    private int scoreSenioridade(Curriculo curriculo) {
-        Nivel nivel = curriculo.getNivel();
-
+    private int calcularScoreNivel(Nivel nivel) {
         if (nivel == null) {
             return 0;
         }
@@ -136,10 +109,11 @@ public class CurriculoService {
      * POS_GRADUACAO = 35 pontos
      * MESTRADO = 45 pontos
      * DOUTORADO = 45 pontos
+     *
+     * @param nivelFormacao nível de formação
+     * @return score de formação
      */
-    private int scoreFormacao(Curriculo curriculo) {
-        NivelFormacao nivelFormacao = curriculo.getNivelFormacao();
-
+    private int calcularScoreFormacao(NivelFormacao nivelFormacao) {
         if (nivelFormacao == null) {
             return 0;
         }
@@ -161,27 +135,30 @@ public class CurriculoService {
      * KAFKA, DOCKER = +8 pontos
      * AWS, GCP, AZURE = +12 pontos
      * Outros cursos = +5 pontos
+     *
+     * @param cursos lista de cursos
+     * @return score total de cursos
      */
-    private int scoreCursos(Curriculo curriculo) {
-        java.util.List<Curso> cursos = curriculo.getCursos();
-
+    private int calcularScoreCursos(java.util.List<Curso> cursos) {
         if (cursos == null || cursos.isEmpty()) {
             return 0;
         }
 
-        int score = 0;
+        int scoreTotal = 0;
         Map<Curso, Integer> pontuacaoPorCurso = buildMapPontuacaoCursos();
 
         for (Curso curso : cursos) {
-            score += pontuacaoPorCurso.getOrDefault(curso, 5);
+            scoreTotal += pontuacaoPorCurso.getOrDefault(curso, 5);
         }
 
-        return score;
+        return scoreTotal;
     }
 
     /**
      * Constrói o mapa de pontuação para cada curso.
      * Facilita a manutenção e extensão da lógica de pontuação.
+     *
+     * @return mapa com pontuações de cada curso
      */
     private Map<Curso, Integer> buildMapPontuacaoCursos() {
         Map<Curso, Integer> pontuacao = new HashMap<>();
@@ -200,7 +177,7 @@ public class CurriculoService {
         pontuacao.put(Curso.GCP, 12);
         pontuacao.put(Curso.AZURE, 12);
 
-        // Para qualquer outro curso não mapeado, o método scoreCursos
+        // Para qualquer outro curso não mapeado, o método calcularScoreCursos
         // usa getOrDefault com 5 como valor padrão
 
         return pontuacao;
@@ -213,10 +190,11 @@ public class CurriculoService {
      * BACK_END ou DEVOPS = +20 pontos
      * FRONT_END = +10 pontos
      * Outras áreas = 0 pontos
+     *
+     * @param area área de atuação
+     * @return score de área
      */
-    private int scoreArea(Curriculo curriculo) {
-        Area area = curriculo.getArea();
-
+    private int calcularScoreArea(Area area) {
         if (area == null) {
             return 0;
         }
@@ -228,3 +206,4 @@ public class CurriculoService {
         };
     }
 }
+

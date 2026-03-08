@@ -27,5 +27,9 @@ public class ScoreDetalhado {
         this.pontuacaoTotal = pontuacaoTotal;
         this.detalhes = detalhes;
     }
+    public ScoreDetalhado(int scoreTotal, int scoreExperiencia, int scoreNivel, int scoreFormacao, int scoreCursos, int scoreArea) {
+        this.pontuacaoTotal = scoreTotal;
+        this.detalhes = detalhes;
+    }
 
 }
